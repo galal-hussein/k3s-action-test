@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: github_binary_release
-  image: husseingalal/drone-dispatch:v0.0.1
+  image: husseingalal/drone-dispatch:v0.1.0
   settings:
     api_key:
       from_secret: github_token
