@@ -14,6 +14,8 @@ steps:
       from_secret: github_token
     event_type: "build"
     client_data: '{"tag":"test","checksum": "1234"}'
+    target_repo: "k3s-upgrade-action-test"
+    target_owner: "galal-hussein"
   when:
     instance:
     - drone-publish.rancher.io
