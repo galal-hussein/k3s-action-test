@@ -10,14 +10,14 @@ steps:
 - name: github_binary_release
   image: husseingalal/drone-dispatch:v0.0.3
   settings:
-    api_key:
-      from_secret: github_token
-    event_type: "build"
-    client_data: '{"tag":"test","checksum": "test"}'
     target_repo: "k3s-upgrade-action-test"
     target_owner: "galal-hussein"
     target-repo: "k3s-upgrade-action-test"
     target-owner: "galal-hussein"
+    api_key:
+      from_secret: github_token
+    event_type: "build"
+    client_data: '{"tag":"test","checksum": "test"}'
   when:
     instance:
     - drone-publish.rancher.io
