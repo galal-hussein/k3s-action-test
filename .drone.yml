@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: github_binary_release
-  image: husseingalal/drone-dispatch:v0.0.6
+  image: husseingalal/drone-dispatch:v0.0.7
   settings:
     dispatch_repo: 'k3s-upgrade-action-test'
     dispatch_owner: 'galal-hussein'
