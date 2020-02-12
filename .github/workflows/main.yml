@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: make sure that release links are available
+      run: |
+        while true; do; if curl --output /dev/null --silent --head --fail "$K3S_RELEASE_LINK"; then; break; else; sleep 5;fi; done
+      env:
+        K3S_RELEASE_LINK: https://github.com/rancher/k3s/releases/download/${GITHUB_REF}/k3s
     - name: send a repository dispatch event
       run: |
         curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/galal-hussein/k3s-upgrade-action-test/dispatches --data '{"event_type": "create_tag", "client_payload": {"tag":"'"$GITHUB_REF"'"}}'
