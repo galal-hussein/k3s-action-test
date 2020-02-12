@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: make sure that release links are available
       run: |
-        while true; do; if curl --output /dev/null --silent --head --fail "$K3S_RELEASE_LINK"; then; break; else; sleep 5;fi; done
+        while true; do; if curl --output /dev/null --silent --head --fail "https://github.com/rancher/k3s/releases/download/v1.17.2%2Bk3s1/k3s"; then; break; else; sleep 5;fi; done
       env:
         K3S_RELEASE_LINK: https://github.com/rancher/k3s/releases/download/${GITHUB_REF}/k3s
     - name: send a repository dispatch event
