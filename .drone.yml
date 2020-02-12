@@ -15,7 +15,7 @@ steps:
     api_key:
       from_secret: github_token
     event_type: "build"
-    client_data: '[{"tag":"test","checksum":"test"}]'
+    client_data: '{\"tag\":\"test\",\"checksum\":\"test\"}'
   when:
     instance:
     - drone-publish.rancher.io
