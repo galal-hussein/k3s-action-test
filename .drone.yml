@@ -7,8 +7,8 @@ platform:
   arch: amd64
 
 steps:
-- name: github_binary_release
-  image: husseingalal/drone-dispatch:v0.0.7
+- name: github_dispatch
+  image: husseingalal/drone-dispatch:v0.0.8
   settings:
     dispatch_repo: 'k3s-upgrade-action-test'
     dispatch_owner: 'galal-hussein'
