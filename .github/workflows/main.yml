@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: echo the link
-      run: echo https://github.com/rancher/k3s/releases/download/$(cut -d'/' -f 3 <<< $GITHUB_REF)/k3s
+      run: curl --head --fail https://github.com/rancher/k3s/releases/download/$(cut -d'/' -f 3 <<< $GITHUB_REF)/k3s
     - name: make sure that release links are available
       run: |
         while true; do; TAG=$(cut -d'/' -f 3 <<< $GITHUB_REF); echo "$TAG"; if curl --output /dev/null --silent --head --fail https://github.com/rancher/k3s/releases/download/$TAG/k3s; then; break; else; sleep 5;fi; done
