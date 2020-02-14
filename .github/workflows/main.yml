@@ -14,7 +14,11 @@ jobs:
       run: |
         while true;
         do
-        sleep 5; echo "hello"
+        TAG=$(cut -d'/' -f 3 <<< $GITHUB_REF)
+        if curl --output /dev/null --silent --head --fail https://github.com/rancher/k3s/releases/download/$TAG/k3s; then
+        break
+        fi
+        sleep 5;
         done
     - name: echo the link
       run: curl --head --fail https://github.com/rancher/k3s/releases/download/$(cut -d'/' -f 3 <<< $GITHUB_REF)/k3s
