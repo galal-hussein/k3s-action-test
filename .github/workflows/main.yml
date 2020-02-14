@@ -8,9 +8,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - name: echo the link
+    - name: make sure release link exists
       run: |
         while true;
         do
@@ -20,11 +19,6 @@ jobs:
         fi
         sleep 5;
         done
-    - name: echo the link
-      run: curl --head --fail https://github.com/rancher/k3s/releases/download/$(cut -d'/' -f 3 <<< $GITHUB_REF)/k3s
-    - name: make sure that release links are available
-      run: |
-        while true; do; TAG=$(cut -d'/' -f 3 <<< $GITHUB_REF); echo "$TAG"; if curl --output /dev/null --silent --head --fail https://github.com/rancher/k3s/releases/download/$TAG/k3s; then; break; else; sleep 5;fi; done
     - name: send a repository dispatch event
       run: |
         curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/galal-hussein/k3s-upgrade-action-test/dispatches --data '{"event_type": "create_tag", "client_payload": {"tag":"'"$GITHUB_REF"'"}}'
