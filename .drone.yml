@@ -1,0 +1,33 @@
+---
+kind: pipeline
+name: dispatch
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: dispatch
+  image: curlimages/curl:7.69.1
+  environment:
+    PAT_USERNAME:
+      from_secret: pat_username
+    PAT_TOKEN:
+      from_secret: github_token
+  commands:
+    - scripts/dispatch
+
+trigger:
+  instance:
+    - drone-publish.rancher.io
+  ref:
+    - refs/head/master
+    - refs/tags/*
+  event:
+    - tag
+
+volumes:
+  - name: docker
+    host:
+      path: /var/run/docker.sock
+
